@@ -62,9 +62,9 @@ type GlobalStateKey =
 	| "azureApiVersion"
 	| "openRouterModelId"
 	| "openRouterModelInfo"
-  | "deepSeekBaseUrl"
 	| "autoApprovalSettings"
-
+	| "deepSeekBaseUrl"
+	
 export const GlobalFileNames = {
 	apiConversationHistory: "api_conversation_history.json",
 	uiMessages: "ui_messages.json",
@@ -932,9 +932,9 @@ async getState() {
 			lastShownAnnouncementId,
 			customInstructions,
 			taskHistory,
+      autoApprovalSettings,
 			deepSeekApiKey,
 			deepSeekBaseUrl,
-			autoApprovalSettings,
 		] = await Promise.all([
 			this.getGlobalState("apiProvider") as Promise<ApiProvider | undefined>,
 			this.getGlobalState("apiModelId") as Promise<string | undefined>,
@@ -964,10 +964,9 @@ async getState() {
 			this.getGlobalState("lastShownAnnouncementId") as Promise<string | undefined>,
 			this.getGlobalState("customInstructions") as Promise<string | undefined>,
 			this.getGlobalState("taskHistory") as Promise<HistoryItem[] | undefined>,
+			this.getGlobalState("autoApprovalSettings") as Promise<AutoApprovalSettings | undefined>,
 			this.getSecret("deepSeekApiKey") as Promise<string | undefined>,
 			this.getGlobalState("deepSeekBaseUrl") as Promise<string | undefined>,
-			this.getGlobalState("autoApprovalSettings") as Promise<AutoApprovalSettings | undefined>,
-
 		])
 
 		let apiProvider: ApiProvider
